@@ -1,0 +1,222 @@
+
+/* FONT */
+
+*{
+    font-family: 'Roboto', 'Droid Sans', sans-serif;
+    font-weight: 300;
+}
+
+/* EXTENDS BOOTSTRAP CORE CLASS */
+.table tbody>tr>td.vert-align{
+    vertical-align: middle;
+}
+
+th{font-family: "Droid Sans", Arial, Helvetica, sans-serif;}
+
+
+/* spettacoli in dashboard */
+
+.odd{
+    height: 100px;
+}
+.upper{
+    height:30px;
+}
+.lower{
+    height:45px;
+}
+.title-container{
+    font-size:20px;
+}
+.gig-title{
+    font-size: 1.3em;
+    letter-spacing: -1px;
+}
+.book-count{
+    border-right: 1px solid #ccc;
+    margin-left: -15px;
+}
+.book-count h3{
+    margin: 0 auto;
+}
+.book-edit{
+    border-left: 1px solid #c8c8c8;
+}
+.book-edit-child {
+    margin: 5px auto;
+}
+
+.book-edit-child a{
+    transition: color 0.5s ease;
+    color: #ccc;
+}
+
+.book-edit-child a:hover{
+    color: black;
+}
+
+.book-edit a{
+    padding: 5px;
+}
+
+/* BOOK SEARCH */
+.cloned-search-result-child{
+    height: 170px;
+    margin: 8px auto;
+    border: 1px solid #ccc;
+}
+
+.upper{
+    border-bottom:1px solid #ccc;
+}
+
+.url-container{
+    border-left: 1px solid #ccc;
+    height:100%;
+    padding:0;
+}
+
+.url-container h6{
+    margin: 5px auto;
+}
+
+.url-container a{
+    transition: color 1s ease-out;
+    color: #ccc;
+}
+
+.url-container a:hover{
+    color: black;
+}
+
+.center > div{
+    margin-top: 15px;
+}
+
+.center img{
+    padding:1px;
+    border: 2px solid #cccccc;
+}
+
+.center h6, .center h3, .center h2{
+    margin: 0;
+}
+
+.center h5{
+    margin: 5px 0 5px 0;
+}
+
+.info{
+    padding-left:1px;
+}
+.title{
+    margin-top:0;
+}
+
+/* icona utente */
+.sidebar-search .fa-user{font-size: 1.2em;}
+
+/* autocomplete prenotazioni e ricerca */
+
+.custom-autocomplete .ui-menu-item{
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+}
+
+.custom-autocomplete .ui-menu-item{
+    background-color: white;
+    border-bottom: 1px solid #ccc;
+}
+
+.custom-autocomplete .ui-menu-item.ui-state-focus{
+    background: #c4e3f3;
+    border:1px solid #ccc;
+    font-weight: normal;
+    color:black;
+}
+
+/******* SINGOLO SPETTACOLO *******/
+
+.event-row{
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.event-show-date h3, .event-show-date h4{
+    margin: 2px 0 auto;
+}
+
+.event-show-date small{
+    font-size: 3rem;
+}
+
+.fake-btn-slim{
+    height: 35px;
+}
+
+.fake-btn:hover{
+    background-color: #3BAFDA;
+}
+
+.fake-btn-alt{
+    background-color: #A0D468;
+    cursor: pointer;
+}
+
+.fake-btn-red{
+    background-color: #ED5565;
+    cursor: pointer;
+    border:none;
+}
+
+.fake-btn-alt:hover{
+    background-color: #8CC152;
+}
+
+.fake-btn-red:hover{
+    background-color: #DA4453;
+}
+
+.fake-btn h3, .fake-btn h4, .fake-btn span{
+    line-height: 50px;
+}
+
+.fake-btn-slim span{
+    line-height: 35px;
+}
+
+.form-section{margin-bottom: 20px;}
+
+.lg-icon{font-size: 2.5em;cursor: pointer;margin-top:25px;}
+
+.nav-pill-form .tab-pane{
+    margin : 20px 10px auto;
+    min-height: 190px;
+}
+
+/* BOOK -- CUSTOM */
+.clickable,#date-confirm, #date-remove {
+    cursor: pointer;
+}
+
+.clickable i{
+    color: #c0c0c0;
+}
+
+/*** EVENT ADD ***/
+
+.event-info-container{
+    margin-bottom:30px;
+}
+
+.event-info{
+    min-height:120px;
+    border-right: 1px solid #cccccc;
+}
+
+.event-info:last-child{
+    border:none;
+}
+
+.event-info div{
+    margin:1px;
+}
