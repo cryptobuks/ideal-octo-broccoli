@@ -26,7 +26,7 @@ class Satispay
     /*
      * URL to satispay sandbox
      */
-    const SATISPAY_SANDBOX = "https://staging.authservices.satispay.com/online/";
+    const SATISPAY_SANDBOX = "https://staging.authservices.satispay.com/online/v1";
 
     /*
      * Mandatory request params
@@ -56,6 +56,7 @@ class Satispay
         curl_setopt($this->curl_handler, CURLINFO_HEADER_OUT, 0);
         //all request should have this header
         curl_setopt($this->curl_handler, CURLOPT_HTTPHEADER, array('Accept:application/json'));
+        curl_setopt($this->curl_handler, CURLOPT_HTTPHEADER, array('Authorization:Bearer ' . $this->properties['security-bearer']));
 
         if($method == 'POST'){
             curl_setopt($this->curl_handler, CURLINFO_CONTENT_TYPE, 'application/json');
@@ -68,7 +69,7 @@ class Satispay
 
         $properties = parse_ini_file('props.ini', true);
 
-        if($properties){
+        if($properties && (count($properties) > 0)){
             $this->properties = $properties;
         }
     }

@@ -13,7 +13,7 @@
                 <div class="form-group">
                     <label for="phone_number">Phone number</label>
                     <input title="phone_number" name="phone_number" class="form-control" type="text">
-                    <input type="hidden" name="api_method" value="v1/users">
+                    <input type="hidden" name="api_method" value="users">
                 </div>
                 <fieldset>
                     <input type="submit" class="btn btn-default" value="go ahead">
