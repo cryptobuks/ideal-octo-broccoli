@@ -54,16 +54,24 @@ function fillDialog(data) {
         $('#dialog-message').text(parsed.message);
 
     } else {
+
         $dialog.addClass('alert alert-success')
             .find('#dialog-title').text('Success');
 
         if(parsed.list){
             //user list
             $.each(parsed.list, function (i, e) {
-                $('#dialog-list').append('<li><span><b>UUID: </b>' + e.uuid + " (" + e.phone_number + ')</span></li>')
+                var value = (e.phone_number != "") ? e.phone_number : e.amount;
+                $('#dialog-list').append('<li><span><b>UUID: </b>' + e.uuid + " (" + value + ')</span></li>')
             })
         } else {
-            $('#dialog-message').text('Phone Number: ' + parsed.phone_number);
+            //other options
+            if(parsed.phone_number){
+                $('#dialog-message').text('Phone Number: ' + parsed.phone_number);
+            } else {
+                $('#dialog-message').text('amount: ' + parsed.amount);
+            }
+
         }
     }
 

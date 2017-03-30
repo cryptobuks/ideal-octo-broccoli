@@ -35,11 +35,6 @@ class Satispay
     private $curl_handler = null;
 
     /*
-     * URL to satispay sandbox
-     */
-    //const SATISPAY_SANDBOX = "https://staging.authservices.satispay.com/online/v1/";
-
-    /*
      * .ini file name
      */
     const INI_FILE_NAME = 'props.ini';
@@ -52,8 +47,15 @@ class Satispay
             'create'    => array('phone_number'),
             'get'       => 'id'
             ),
-        'charges'    => array('user_id', 'currency', 'amount'),
-        'refund'     => array('charge_id', 'currency', 'amount')
+        'charges'    => array(
+            'create'    => array('user_id', 'currency', 'amount'),
+            'get'       => 'id'
+        ),
+        //needs testing
+        'refund'     => array(
+            'create'    => array('charge_id', 'currency', 'amount'),
+            'get'       => 'id'
+        )
     );
 
     /*
@@ -63,7 +65,9 @@ class Satispay
         'users'     => array(
             'list'      => array('starting_after', 'ending_before', 'limit')
         ),
-        'charges'    => array('description', 'metadata', 'expire_in', 'callback_url')
+        'charges'    => array(
+            'list'      => array('starting_after', 'ending_before', 'limit', 'starting_after_timestamp')
+        )
     );
 
     /*
@@ -100,6 +104,26 @@ class Satispay
 
     }
 
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
+    public function exec(){
+
+        $result = curl_exec($this->curl_handler);
+
+        if(FALSE == $result){
+            throw new \Exception(curl_errno($this->curl_handler) . " - " . curl_error($this->curl_handler));
+        }
+
+        return $result;
+
+    }
+
+    /**
+     * @param $method
+     * @param $data
+     */
     private function setRequestData($method, $data){
 
         if($method == 'POST') {
@@ -157,17 +181,23 @@ class Satispay
         $body = array();
 
         //get data map for mandatory fields
-        if(array_key_exists($this->action, $this->mandatoryRequestData[$this->url])){ //check for key in multidimensional array
+        if(array_key_exists($this->action, $this->mandatoryRequestData[$this->url])){
+            //check for key in multidimensional array
             $mandatoryFields = $this->mandatoryRequestData[$this->url][$this->action];
 
             if($mandatoryFields){
 
                 if(is_array($mandatoryFields)){
                     foreach ($mandatoryFields as $mandatoryField) {
-                        $body[$mandatoryField] = $data[$mandatoryField];
+                        //some fields needs to be modified
+                        $field = $this->checkField($mandatoryField, $data[$mandatoryField]);
+                        $body[$mandatoryField] = $field;
                     }
                 } else {
-                    $body = $data[$mandatoryFields];
+                    
+                    if($data[$mandatoryFields] != ""){
+                        $body = $data[$mandatoryFields];
+                    }
                 }
             }
         }
@@ -176,7 +206,7 @@ class Satispay
         if(array_key_exists($this->action, $this->nonMandatoryRequestData[$this->url])){
             $optionalFields = $this->nonMandatoryRequestData[$this->url][$this->action];
             foreach ($optionalFields as $optionalField) {
-                //optional, only if provided
+                //optional, set only if provided
                 if(array_key_exists($optionalField, $data) && $data[$optionalField] != ""){
                     $body[$optionalField] = $data[$optionalField];
                 }
@@ -187,39 +217,21 @@ class Satispay
 
     }
 
-    /**
-     * @return mixed
-     * @throws \Exception
-     */
-    public function exec(){
+    private function checkField($field, $value){
 
-        $result = curl_exec($this->curl_handler);
+        $returnValue = $value;
 
-        if(FALSE == $result){
-            throw new \Exception(curl_errno($this->curl_handler) . " - " . curl_error($this->curl_handler));
+        //amount needs to be modified
+        if($field == 'amount'){
+            $returnValue = $value * 100;
         }
 
-        return $result;
+        if($field == 'starting_after_timestamp'){
+            //convert to timestamp
+        }
 
-    }
+        return $returnValue;
 
-}
-
-class UserRequest{
-
-    public static function create($route, $body = null){
-        //is a POST request
-        return new Satispay('POST', $route, $body);
-    }
-
-    public static function getList($body = null){
-        //GET request
-        return new Satispay('GET', 'users/list', $body);
-    }
-
-    public static function getUser($body){
-        //GET request
-        return new Satispay('GET', 'users/get', $body);
     }
 
 }
@@ -227,20 +239,8 @@ class UserRequest{
 class Request{
 
     public static function create($method, $route, $body = null){
-        //is a POST request
+        //get instance of Satispay Wrapper "Factory"
         return new Satispay($method, $route, $body);
-    }
-
-}
-
-class ChargeRequest{
-
-    public static function create($body = null){
-        return new Satispay('POST', 'charges/create');
-    }
-    
-    public static function getCharge($body = null){
-        return new Satispay('GET', 'charges/get');
     }
 
 }

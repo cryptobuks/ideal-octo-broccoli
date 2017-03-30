@@ -29,6 +29,8 @@
                 <h2>Charges API</h2>
                 <ul class="list-unstyled">
                     <li><a href="pg/charges/create.php">Create Charge</a></li>
+                    <li><a href="pg/charges/get.php">Get Charge</a></li>
+                    <li><a href="pg/charges/list.php">Get Charge list</a> </li>
                 </ul>
             </div>
         </div>
