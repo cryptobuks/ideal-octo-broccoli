@@ -6,19 +6,32 @@
  * Time: 11:15
  */
 ?>
-<html>
-    <head>
-        <title>Satispay API</title>
-        <link rel="stylesheet" href="css/bootstrap.css">
-    </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Satispay Lib Sample</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
     <body>
     <div class="container text-center">
         <h1>Satispay Api Use Example</h1>
-        <ul class="list-inline">
-            <li><a href="pg/user.php">User API (create)</a></li>
-            <li><a href="pg/charge.php">Charge API</a></li>
-            <li><a href="pg/refund.php">Refund API</a></li>
-        </ul>
+        <div class="col-lg-12">
+            <div class="col-lg-6">
+                <h2>Users API</h2>
+                <ul class="list-unstyled">
+                    <li><a href="pg/user/create.php">Create User</a></li>
+                    <li><a href="pg/user/get.php">Get User</a></li>
+                    <li><a href="pg/user/list.php">Get User list</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-6">
+                <h2>Charges API</h2>
+                <ul class="list-unstyled">
+                    <li><a href="pg/charges/create.php">Create Charge</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
     </body>
 </html>

@@ -6,26 +6,21 @@
  * Time: 15:46
  */
 
-use satispay\Satispay as Satispay;
 require_once 'src/lib/Satispay.php';
+use satispay\Request as Request;
 
-$url = $_REQUEST['api_method'];
+$request = null;
+
 $method = $_SERVER['REQUEST_METHOD'];
-$obj = null;
+$route = $_REQUEST['api_method'];
+$obj = $_REQUEST;
 
-if($method == 'POST'){
-    $obj = $_REQUEST;
+//create request Object
+$request = Request::create($method, $route, $obj);
+$res = null;
+
+//check for request
+if(!is_null($request)) {
+    $res = $request->exec();
 }
-
-
-
-if($method != ""){
-
-}
-
-$satispay_helper = new Satispay($method, $url, $obj);
-
-$res = $satispay_helper->exec();
-
-var_dump($res);
-die();
+//var_dump($res);

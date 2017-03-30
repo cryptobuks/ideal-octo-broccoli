@@ -9,13 +9,13 @@
 <html>
     <head>
         <title>Satispay charge API example</title>
-        <link rel="stylesheet" href="../css/bootstrap.css">
+        <link rel="stylesheet" href="../../css/bootstrap.css">
     </head>
     <body>
         <div class="container text-center">
             <h1>Create Refund</h1>
             <div class="col-lg-4 col-lg-offset-4">
-                <form class="form-horizontal" method="post" action="../request.php">ù
+                <form class="form-horizontal" method="post" action="../../request.php">ù
                 <div class="form-group">
                     <label for="user_id">User Id</label>
                     <input title="user_id" name="user_id" class="form-control" type="text">
